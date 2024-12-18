@@ -1,0 +1,11 @@
+- Initializes files
+docker compose -f docker-compose.yml run --rm terraform init
+
+- Previews changes terraform can make
+docker compose -f docker-compose.yml run --rm terraform plan -auto-approve
+
+- Applys the plan
+docker compose -f docker-compose.yml run --rm terraform apply -auto-approve
+
+- Destroy the machines
+docker compose -f docker-compose.yml run --rm terraform destroy -auto-approve
