@@ -1,0 +1,6 @@
+- hosts: arrs
+  remote_user: moob
+  become: yes
+  roles:
+    - essential
+    - docker

@@ -1,0 +1,7 @@
+username: moob
+packages:
+  - htop
+  - neofetch
+  - tmux
+  - net-tools
+  - speedtest-cli
