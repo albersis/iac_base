@@ -5,3 +5,4 @@ packages:
   - tmux
   - net-tools
   - speedtest-cli
+  - cifs-utils

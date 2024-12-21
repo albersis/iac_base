@@ -15,14 +15,14 @@
     state: present
 - name: add docker repository to apt
   apt_repository:
-    repo: deb https://download.docker.com/linux/ubuntu stable
+    repo: deb https://download.docker.com/linux/ubuntu bionic stable
     state: present
 - name: install docker
   apt:
     name: "{{item}}"
     state: latest
     update_cache: yes
-    loop:
+  loop:
         - docker-ce
         - docker-ce-cli
         - containerd.io
@@ -37,8 +37,61 @@
   ansible.builtin.group:
     name: docker
     state: present
-- name: adding ubuntu to docker group
+- name: adding "{{ username }}" to docker group
   user:
     name: moob
     groups: docker
     append: yes
+
+
+
+- name: Create docker folder
+  ansible.builtin.file:
+    path:  docker
+    state: directory
+    mode: '0755'
+- name: Create docker volumes folder
+  ansible.builtin.file:
+    path:  docker/volumes
+    state: directory
+    mode: '0755'
+- name: Create radarr folder
+  ansible.builtin.file:
+    path:  docker/radarr
+    state: directory
+    mode: '0755'
+- name: Create radarr volumes folder
+  ansible.builtin.file:
+    path:  docker/volumes/radarr
+    state: directory
+    mode: '0755'
+- name: Create sonarr folder
+  ansible.builtin.file:
+    path:  docker/sonarr
+    state: directory
+    mode: '0755'
+- name: Create sonarr volumes folder
+  ansible.builtin.file:
+    path:  docker/volumes/sonarr
+    state: directory
+    mode: '0755'
+- name: Create prowlarr folder
+  ansible.builtin.file:
+    path:  docker/prowlar
+    state: directory
+    mode: '0755'
+- name: Create prowlarr volumes folder
+  ansible.builtin.file:
+    path:  docker/volumes/prowlarr
+    state: directory
+    mode: '0755'
+- name: Create whisparr folder
+  ansible.builtin.file:
+    path:  docker/whisparr
+    state: directory
+    mode: '0755'
+- name: Create whisparr volumes folder
+  ansible.builtin.file:
+    path:  docker/volumes/whisparr
+    state: directory
+    mode: '0755'
