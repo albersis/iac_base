@@ -50,48 +50,8 @@
     path:  docker
     state: directory
     mode: '0755'
-- name: Create docker volumes folder
-  ansible.builtin.file:
-    path:  docker/volumes
-    state: directory
-    mode: '0755'
-- name: Create radarr folder
-  ansible.builtin.file:
-    path:  docker/radarr
-    state: directory
-    mode: '0755'
-- name: Create radarr volumes folder
-  ansible.builtin.file:
-    path:  docker/volumes/radarr
-    state: directory
-    mode: '0755'
-- name: Create sonarr folder
-  ansible.builtin.file:
-    path:  docker/sonarr
-    state: directory
-    mode: '0755'
-- name: Create sonarr volumes folder
-  ansible.builtin.file:
-    path:  docker/volumes/sonarr
-    state: directory
-    mode: '0755'
-- name: Create prowlarr folder
-  ansible.builtin.file:
-    path:  docker/prowlar
-    state: directory
-    mode: '0755'
-- name: Create prowlarr volumes folder
-  ansible.builtin.file:
-    path:  docker/volumes/prowlarr
-    state: directory
-    mode: '0755'
-- name: Create whisparr folder
-  ansible.builtin.file:
-    path:  docker/whisparr
-    state: directory
-    mode: '0755'
-- name: Create whisparr volumes folder
-  ansible.builtin.file:
-    path:  docker/volumes/whisparr
-    state: directory
-    mode: '0755'
+- name: Copy docker volumes
+  ansible.builtin.copy:
+    src: /home/{{ username }}/media/backups/docker/arrs
+    dest: /home/{{ username }}/docker
+    remote_src: yes

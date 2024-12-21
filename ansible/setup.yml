@@ -4,4 +4,4 @@
   roles:
 #    - essential
     - samba
-#    - docker
+    - docker
