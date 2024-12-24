@@ -1,4 +1,5 @@
 username: moob
+host_username: loki
 packages:
   - htop
   - neofetch

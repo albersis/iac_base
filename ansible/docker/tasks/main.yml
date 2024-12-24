@@ -50,8 +50,46 @@
     path:  docker
     state: directory
     mode: '0755'
+
 - name: Copy docker volumes
   ansible.builtin.copy:
-    src: /home/{{ username }}/media/backups/docker/arrs
+    src: /home/{{ username }}/media/backups/docker/volumes
     dest: /home/{{ username }}/docker
     remote_src: yes
+
+- name: changing owernership of docker folder
+  ansible.builtin.file:
+    path: /home/{{ username }}/docker
+    state: directory
+    recurse: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: changing owernership of package folder
+  ansible.builtin.file:
+    path: /home/{{ username }}/package
+    state: directory
+    recurse: yes
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: make cron job executable
+  ansible.builtin.file:
+    path: /home/{{ username }}/package/cron.sh
+    state: file
+    mode: u+x
+
+- name: Creates a cron job
+  ansible.builtin.cron:
+    name: docker backup
+    weekday: "2"
+    minute: "0"
+    hour: "12"
+    user: "{{ username }}"
+    job: /home/{{ username }}/package/cron.sh
+
+- name: deploy arrs stack
+  community.docker.docker_compose_v2:
+    project_src: /home/moob/docker/volumes/arrs
+    files:
+    - docker-compose.yml 

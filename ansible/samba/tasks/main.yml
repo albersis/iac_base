@@ -1,6 +1,6 @@
 - name: Copying files over
   ansible.builtin.copy:
-    src: /home/loki/repos/iac_base/ansible/package
+    src: /home/{{ host_username }}/repos/iac_base/ansible/package
     dest: /home/{{ username }}
 
 - name: Create media folder
@@ -9,23 +9,10 @@
     state: directory
     mode: '0755'
 
-- name: Create media folder
-  ansible.builtin.file:
-    path:  smb
-    state: directory
-    mode: '0755'
-
-- name: Moving samba creds
-  ansible.builtin.copy:
-    src: /home/{{ username }}/package/.creds
-    dest: /home/{{ username }}/smb
-    remote_src: yes
-
 - name: Mount network share
   mount:
     src: //192.168.4.35/share
     path: /home/{{ username }}/media
     fstype: cifs
-    opts: 'credentials=/home/{{ username }}/smb/.creds'
+    opts: 'credentials=/home/{{ username }}/package/.creds'
     state: mounted
-
