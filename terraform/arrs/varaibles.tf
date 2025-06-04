@@ -1,8 +1,7 @@
 
-
 variable "root_password" {
     type = string
-    default = "Orange1r"
+    default = "password"
 }
 
 variable "ssh_public_key" {
