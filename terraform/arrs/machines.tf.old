@@ -2,7 +2,7 @@ resource "proxmox_lxc" "machines" {
   target_node  = "proxboxbig"
   hostname     = "radarr"
   ostemplate   = "local:vztmpl/ubuntu-24.04-standard_24.04-2_amd64.tar.zst"
-  password     = "Orange1r"
+  password     = "password"
   unprivileged = false
   cores = 2
   memory = 2048
@@ -24,7 +24,7 @@ resource "proxmox_lxc" "machines" {
   }
 
   ssh_public_keys = <<-EOT
-    ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIANwVQrieNSv4bKU2X8pwn3zhiXHKQL2EWk8FG2bQqZN
+    *public_key
   EOT
 
 }
